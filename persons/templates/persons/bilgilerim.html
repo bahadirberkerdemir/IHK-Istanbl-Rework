@@ -1,0 +1,150 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<div class="container mt-4 mb-5">
+    <div class="card border-0 shadow-sm p-4">
+        <h4 class="fw-bold mb-4 text-primary">Profil Bilgilerimi Güncelle</h4>
+
+        <form method="POST" enctype="multipart/form-data" action="{% url 'persons:bilgilerim' %}">
+            {% csrf_token %}
+
+            <h6 class="fw-bold text-danger border-bottom pb-2 mt-4">Temel Bilgiler</h6>
+    <div class="row g-3 mb-4">
+        
+        <div class="col-md-4">
+            <label class="form-label small text-muted">Ad Soyad</label>
+            <input type="text" class="form-control bg-light text-muted" value="{{ profil.ad_soyad }}" disabled>
+        </div>
+        
+        <div class="col-md-4">
+            <label class="form-label small text-muted">Kimlik No (TCKN)</label>
+            <input type="text" class="form-control bg-light text-muted" value="{{ profil.tckn }}" disabled>
+        </div>
+        
+        <div class="col-md-4">
+            <label class="form-label small text-muted">Lisans No</label>
+            <input type="text" class="form-control bg-light text-muted" value="{{ profil.lisans_no }}" disabled>
+        </div>
+        
+        <div class="col-md-6">
+            <label class="form-label small text-muted">Görev</label>
+            <input type="text" class="form-control bg-light text-muted" value="{{ profil.gorev }}" disabled>
+        </div>
+        
+        <div class="col-md-6">
+            <label class="form-label small text-muted">Klasman</label>
+            <input type="text" class="form-control bg-light text-muted" value="{{ profil.get_klasman_display }}" disabled>
+        </div>
+
+    </div>
+
+            <!-- ================= 1. BÖLÜM: KİMLİK BİLGİLERİ ================= -->
+            <h6 class="fw-bold text-secondary border-bottom pb-2 mt-4">Kimlik Bilgileri</h6>
+            <div class="row g-3 mb-3">
+                <div class="col-md-3"><label class="form-label small text-muted">{{ form.anne_adi.label }}</label>{{ form.anne_adi }}</div>
+                <div class="col-md-3"><label class="form-label small text-muted">{{ form.baba_adi.label }}</label>{{ form.baba_adi }}</div>
+                <div class="col-md-3"><label class="form-label small text-muted">{{ form.dogum_yeri.label }}</label>{{ form.dogum_yeri }}</div>
+                <div class="col-md-3"><label class="form-label small text-muted">{{ form.dogum_tarihi.label }}</label>{{ form.dogum_tarihi }}</div>
+                
+                <div class="col-md-3"><label class="form-label small text-muted">{{ form.cinsiyet.label }}</label>{{ form.cinsiyet }}</div>
+                <div class="col-md-3"><label class="form-label small text-muted">{{ form.medeni_hal.label }}</label>{{ form.medeni_hal }}</div>
+                <div class="col-md-3"><label class="form-label small text-muted">{{ form.kan_grubu.label }}</label>{{ form.kan_grubu }}</div>
+            </div>
+
+            <div class="row g-3 mb-3">
+                <div class="col-md-2"><label class="form-label small text-muted">{{ form.nufus_il.label }}</label>{{ form.nufus_il }}</div>
+                <div class="col-md-2"><label class="form-label small text-muted">{{ form.nufus_ilce.label }}</label>{{ form.nufus_ilce }}</div>
+                <div class="col-md-2"><label class="form-label small text-muted">{{ form.mahalle_koy.label }}</label>{{ form.mahalle_koy }}</div>
+                <div class="col-md-2"><label class="form-label small text-muted">{{ form.cilt_no.label }}</label>{{ form.cilt_no }}</div>
+                <div class="col-md-2"><label class="form-label small text-muted">{{ form.aile_sira_no.label }}</label>{{ form.aile_sira_no }}</div>
+                <div class="col-md-2"><label class="form-label small text-muted">{{ form.sira_no.label }}</label>{{ form.sira_no }}</div>
+            </div>
+
+            <!-- ================= 2. BÖLÜM: ADRES VE İLETİŞİM BİLGİLERİ ================= -->
+            <h6 class="fw-bold text-secondary border-bottom pb-2 mt-4">Adres ve İletişim Bilgileri</h6>
+            <div class="row g-3 mb-3">
+                <div class="col-md-6"><label class="form-label small text-muted">{{ form.ilce.label }}</label>{{ form.ilce }}</div>
+                <div class="col-md-6"><label class="form-label small text-muted">{{ form.semt.label }}</label>{{ form.semt }}</div>
+                
+                <div class="col-md-3"><label class="form-label small text-muted">{{ form.eposta.label }}</label>{{ form.eposta }}</div>
+                <div class="col-md-3"><label class="form-label small text-muted">{{ form.telefon_cep.label }}</label>{{ form.telefon_cep }}</div>
+                <div class="col-md-2"><label class="form-label small text-muted">{{ form.telefon_ev.label }}</label>{{ form.telefon_ev }}</div>
+                <div class="col-md-2"><label class="form-label small text-muted">{{ form.telefon_is.label }}</label>{{ form.telefon_is }}</div>
+                <div class="col-md-2"><label class="form-label small text-muted">{{ form.telefon_dahili.label }}</label>{{ form.telefon_dahili }}</div>
+            </div>
+
+            <!-- ================= 3. BÖLÜM: BANKA VE FİZİKSEL BİLGİLER ================= -->
+            <h6 class="fw-bold text-secondary border-bottom pb-2 mt-4">Banka ve Fiziksel Bilgiler</h6>
+            <div class="row g-3 mb-3">
+                <div class="col-md-3"><label class="form-label small text-muted">{{ form.banka.label }}</label>{{ form.banka }}</div>
+                <div class="col-md-3"><label class="form-label small text-muted">{{ form.sube_kodu.label }}</label>{{ form.sube_kodu }}</div>
+                <div class="col-md-3"><label class="form-label small text-muted">{{ form.hesap_no.label }}</label>{{ form.hesap_no }}</div>
+                <div class="col-md-3"><label class="form-label small text-muted">{{ form.iban.label }}</label>{{ form.iban }}</div>
+            </div>
+
+            <div class="row g-3 mb-3">
+                <div class="col-md-2"><label class="form-label small text-muted">{{ form.boy.label }}</label>{{ form.boy }}</div>
+                <div class="col-md-2"><label class="form-label small text-muted">{{ form.kilo.label }}</label>{{ form.kilo }}</div>
+                <div class="col-md-2"><label class="form-label small text-muted">{{ form.beden.label }}</label>{{ form.beden }}</div>
+                <div class="col-md-2"><label class="form-label small text-muted">{{ form.ayak_no.label }}</label>{{ form.ayak_no }}</div>
+                <div class="col-md-2"><label class="form-label small text-muted">{{ form.askerlik_durumu.label }}</label>{{ form.askerlik_durumu }}</div>
+                <div class="col-md-2"><label class="form-label small text-muted">{{ form.tecil_tarihi.label }}</label>{{ form.tecil_tarihi }}</div>
+            </div>
+
+            <!-- ================= 4. BÖLÜM: EĞİTİM VE DİĞER BİLGİLER ================= -->
+            <h6 class="fw-bold text-secondary border-bottom pb-2 mt-4">Eğitim ve Meslek Bilgileri</h6>
+            <div class="row g-3 mb-3">
+                <div class="col-md-3"><label class="form-label small text-muted">{{ form.egitim_seviyesi.label }}</label>{{ form.egitim_seviyesi }}</div>
+                <div class="col-md-3"><label class="form-label small text-muted">{{ form.mezun_oldugu_okul.label }}</label>{{ form.mezun_oldugu_okul }}</div>
+                <div class="col-md-3"><label class="form-label small text-muted">{{ form.mezun_oldugu_bolum.label }}</label>{{ form.mezun_oldugu_bolum }}</div>
+                <div class="col-md-3"><label class="form-label small text-muted">{{ form.mezuniyet_yili.label }}</label>{{ form.mezuniyet_yili }}</div>
+                
+                <div class="col-md-4"><label class="form-label small text-muted">{{ form.meslek.label }}</label>{{ form.meslek }}</div>
+                <div class="col-md-4"><label class="form-label small text-muted">{{ form.bolge.label }}</label>{{ form.bolge }}</div>
+                <div class="col-md-4"><label class="form-label small text-muted">{{ form.foto.label }}</label>{{ form.foto }}</div>
+            </div>
+
+            <!-- ================= 5. BÖLÜM: MÜSAİTLİK GÜNLERİ ================= -->
+            <h6 class="fw-bold text-secondary border-bottom pb-2 mt-4">Müsaitlik Durumu (Uygun Olduğunuz Günleri İşaretleyin)</h6>
+            <div class="row g-3 mb-4">
+                <div class="col-md-12 d-flex flex-wrap gap-4">
+                    <div class="form-check">
+                        {{ form.monday }} <label class="form-check-label">{{ form.monday.label }}</label>
+                    </div>
+                    <div class="form-check">
+                        {{ form.tuesday }} <label class="form-check-label">{{ form.tuesday.label }}</label>
+                    </div>
+                    <div class="form-check">
+                        {{ form.wednesday }} <label class="form-check-label">{{ form.wednesday.label }}</label>
+                    </div>
+                    <div class="form-check">
+                        {{ form.thursday }} <label class="form-check-label">{{ form.thursday.label }}</label>
+                    </div>
+                    <div class="form-check">
+                        {{ form.friday }} <label class="form-check-label">{{ form.friday.label }}</label>
+                    </div>
+                    <div class="form-check">
+                        {{ form.saturday }} <label class="form-check-label">{{ form.saturday.label }}</label>
+                    </div>
+                    <div class="form-check">
+                        {{ form.sunday }} <label class="form-check-label">{{ form.sunday.label }}</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hata Mesajları İçin Kontrol (Eğer bir alan boş veya hatalıysa uyarı verir) -->
+            {% if form.errors %}
+                <div class="alert alert-danger mt-3">
+                    Lütfen kırmızı ile işaretlenen veya hatalı girdiğiniz alanları kontrol edin.
+                </div>
+            {% endif %}
+
+            <!-- KAYDET BUTONU -->
+            <div class="text-end border-top pt-3 mt-4">
+                <button type="submit" class="btn btn-success px-5 py-2 fw-bold">Bilgilerimi Kaydet</button>
+            </div>
+        </form>
+    </div>
+</div>
+{%endblock%}

@@ -1,0 +1,22 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+
+<div>
+    <h2 style="border: 3px black solid; background-color: white;width: fit-content;margin-top: 25px;">Şifreni Değiştir</h2>
+    <form method="POST" style="background-color: white; width: fit-content;" class="text-end">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="mb-3" style="align-items:end;">
+            {{ field.label_tag }}
+            {{ field }}
+        </div>
+        {% endfor %}
+
+    <button type="submit" class="btn btn-primary">Şifreyi Güncelle</button>
+    </form>
+</div>
+
+
+{%endblock%}

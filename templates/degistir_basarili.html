@@ -1,0 +1,12 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<body>
+    <div style="border: 3px black solid; background-color: white;width: fit-content;margin-top: 25px;">
+        <h2>Şifreniz başarıyla değiştirilmiştir!</h2>
+        <a href="{% url 'login' %}" class="btn btn-primary" style="margin-top: 25px;">Giriş sayfasına dön</a>
+    </div>
+</body>
+
+{%endblock%}
