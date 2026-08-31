@@ -6,6 +6,14 @@
     <div class="card border-0 shadow-sm p-4">
         <h4 class="fw-bold mb-4 text-primary">Profil Bilgilerimi Güncelle</h4>
 
+        <div class="text-center mb-4">
+            {% if profil.foto %}
+                <img src="{{ profil.foto.url }}" alt="Profil fotoğrafı" class="profil-foto">
+            {% else %}
+                <p class="text-muted mb-0">Henüz fotoğraf yüklenmemiş.</p>
+            {% endif %}
+        </div>
+
         <form method="POST" enctype="multipart/form-data" action="{% url 'persons:bilgilerim' %}">
             {% csrf_token %}
 
@@ -142,7 +150,7 @@
 
             <!-- KAYDET BUTONU -->
             <div class="text-end border-top pt-3 mt-4">
-                <button type="submit" class="btn btn-success px-5 py-2 fw-bold">Bilgilerimi Kaydet</button>
+                <button type="submit" class="btn-ihk px-5 py-2 fw-bold">Bilgilerimi Kaydet</button>
             </div>
         </form>
     </div>

@@ -15,8 +15,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path, include
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
 from BulletIn.views import CustomPasswordChangeView
 
 urlpatterns = [
@@ -24,6 +26,9 @@ urlpatterns = [
     path('', include('BulletIn.urls')),
     path('persons/', include('persons.urls')),
     path('', include('django.contrib.auth.urls')),
-    path('sifre-degistir/', CustomPasswordChangeView.as_view(template_name='degistir.html'), name='password_change'), 
-    path('sifre-degistir/basarili/', auth_views.PasswordChangeDoneView.as_view(template_name='degistir_basarili.html'), name='password_change_done')
+    path('sifre-degistir/', CustomPasswordChangeView.as_view(template_name='degistir.html'), name='password_change'),
+    path('sifre-degistir/basarili/', auth_views.PasswordChangeDoneView.as_view(template_name='degistir_basarili.html'), name='password_change_done'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

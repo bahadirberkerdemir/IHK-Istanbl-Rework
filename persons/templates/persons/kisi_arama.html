@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="sayfa-icerik">
+    <h2 class="sayfa-baslik">Kişi Arama</h2>
+
+    <form method="get" class="kisi-arama-form">
+        <input type="text" name="q" value="{{ arama }}" placeholder="Ada göre ara..." class="form-control kisi-arama-input">
+        <button type="submit" class="btn-ihk">Ara</button>
+    </form>
+
+    <div class="kisi-liste">
+        <div class="kisi-satir kisi-baslik-satir">
+            <div>Ad Soyad</div>
+            <div>Telefon</div>
+            <div>Klasman</div>
+            <div>Lisans No</div>
+            <div>Görev</div>
+        </div>
+        {% for kisi in sayfa %}
+        <div class="kisi-satir">
+            <div>{{ kisi.ad_soyad }}</div>
+            <div>{{ kisi.telefon|default:"-" }}</div>
+            <div>{{ kisi.klasman }}</div>
+            <div>{% if kisi.lisans_no %}{{ kisi.lisans_no }}{% else %}-{% endif %}</div>
+            <div>{{ kisi.tip }}</div>
+        </div>
+        {% empty %}
+        <div class="kisi-bos">Kayıt bulunamadı.</div>
+        {% endfor %}
+    </div>
+
+    {% if sayfa.paginator.num_pages > 1 %}
+    <nav class="sayfalama">
+        {% if sayfa.has_previous %}
+            <a class="btn-ihk" href="?q={{ arama }}&sayfa={{ sayfa.previous_page_number }}">Önceki</a>
+        {% endif %}
+        <span class="sayfa-bilgi">{{ sayfa.number }} / {{ sayfa.paginator.num_pages }}</span>
+        {% if sayfa.has_next %}
+            <a class="btn-ihk" href="?q={{ arama }}&sayfa={{ sayfa.next_page_number }}">Sonraki</a>
+        {% endif %}
+    </nav>
+    {% endif %}
+</div>
+{% endblock %}

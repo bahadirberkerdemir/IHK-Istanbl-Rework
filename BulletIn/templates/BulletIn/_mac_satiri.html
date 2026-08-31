@@ -1,0 +1,39 @@
+<div class="mac-satir">
+    <div class="mac-hucre mac-saat">{{ mac.tarih_saat|time:"H:i" }}</div>
+    <div class="mac-hucre mac-takimlar">{{ mac.ev_sahibi }} – {{ mac.deplasman }}</div>
+    <div class="mac-hucre mac-lig">{{ mac.lig }}</div>
+    <div class="mac-hucre mac-gorevli{% if kullanici_hakem_id and mac.hakem_id == kullanici_hakem_id %} isaretli{% endif %}">
+        {% if mac.hakem %}{{ mac.hakem.ad_soyad }}{% endif %}
+    </div>
+    <div class="mac-hucre mac-gorevli{% if kullanici_hakem_id and mac.birinci_yardimci_id == kullanici_hakem_id %} isaretli{% endif %}">
+        {% if mac.birinci_yardimci %}{{ mac.birinci_yardimci.ad_soyad }}{% endif %}
+    </div>
+    <div class="mac-hucre mac-gorevli{% if kullanici_hakem_id and mac.ikinci_yardimci_id == kullanici_hakem_id %} isaretli{% endif %}">
+        {% if mac.ikinci_yardimci %}{{ mac.ikinci_yardimci.ad_soyad }}{% endif %}
+    </div>
+    <div class="mac-hucre mac-gorevli{% if kullanici_hakem_id and mac.dorduncu_hakem_id == kullanici_hakem_id %} isaretli{% endif %}">
+        {% if mac.dorduncu_hakem %}{{ mac.dorduncu_hakem.ad_soyad }}{% endif %}
+    </div>
+    <div class="mac-hucre mac-gorevli{% if kullanici_gozlemci_id and mac.gozlemci_id == kullanici_gozlemci_id %} isaretli{% endif %}">
+        {% if mac.gozlemci %}{{ mac.gozlemci.ad_soyad }}{% endif %}
+    </div>
+    <div class="mac-hucre mac-rapor-alani">
+        {% if mac.gozlemci_raporu_gorunur %}
+            {% if mac.gozlemci_puani is not None %}
+                <span class="puan-sembol" title="Gözlemci puanı">{{ mac.gozlemci_puani }}</span>
+            {% endif %}
+            <a class="rapor-link" href="{{ mac.gozlemci_raporu.url }}" target="_blank" rel="noopener">Rapor</a>
+        {% endif %}
+        {% if rapor_butonu_goster and orta_hakem_id and mac.hakem_id == orta_hakem_id %}
+            {% if mac.hakem_raporu_gonderildi %}
+                <span class="rapor-gonderildi">Rapor Gönderildi</span>
+            {% else %}
+                <form method="post" class="rapor-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="mac_id" value="{{ mac.id }}">
+                    <button type="submit" class="btn-ihk">Rapor Ekle</button>
+                </form>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>

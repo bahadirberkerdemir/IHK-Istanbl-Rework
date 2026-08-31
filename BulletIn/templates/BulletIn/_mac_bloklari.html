@@ -1,0 +1,27 @@
+{% if gun_bloklari %}
+    {% for blok in gun_bloklari %}
+    <div class="mac-gun-blok">
+        <div class="mac-gun-baslik">{{ blok.gun|date:"l, d F Y" }}</div>
+        <div class="mac-tablo">
+            <div class="mac-satir mac-baslik-satir">
+                <div class="mac-hucre mac-saat">Saat</div>
+                <div class="mac-hucre mac-takimlar">Takımlar</div>
+                <div class="mac-hucre mac-lig">Lig</div>
+                <div class="mac-hucre mac-gorevli">Hakem</div>
+                <div class="mac-hucre mac-gorevli">1. Yardımcı Hakem</div>
+                <div class="mac-hucre mac-gorevli">2. Yardımcı Hakem</div>
+                <div class="mac-hucre mac-gorevli">Dördüncü Hakem</div>
+                <div class="mac-hucre mac-gorevli">Gözlemci</div>
+                <div class="mac-hucre mac-rapor-alani"></div>
+            </div>
+            {% for mac in blok.maclar %}
+                {% include 'BulletIn/_mac_satiri.html' %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="mac-gun-blok">
+        <p class="mb-0">Gösterilecek maç bulunmamaktadır.</p>
+    </div>
+{% endif %}

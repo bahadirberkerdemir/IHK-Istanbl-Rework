@@ -6,6 +6,7 @@ app_name = 'persons'
 
 urlpatterns = [
     path('', views.bilgilerim_view, name='bilgilerim'),
+    path('kisi-arama/', views.kisi_arama_view, name='kisi_arama'),
 ]
 
 if settings.DEBUG:
